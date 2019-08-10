@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="rate"
+            type="com.revolut.plutus.api.Rate" />
+
+        <variable
+            name="rateListener"
+            type="com.revolut.plutus.rates.RateListener" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center_vertical"
+        android:minHeight="?attr/listPreferredItemHeight"
+        android:onClick="@{() -> rateListener.onClick(rate)}"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/simple_padding_large"
+        android:paddingEnd="@dimen/simple_padding_large">
+
+        <ImageView
+            android:id="@+id/rate_flag_image_view"
+            android:layout_width="@dimen/flag_size"
+            android:layout_height="@dimen/flag_size"
+            app:countryCode="@{rate.countryCode}"
+            tools:ignore="ContentDescription" />
+
+        <Space
+            android:layout_width="@dimen/simple_padding_large"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/rate_currency_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/placeholder"
+                android:textColor="@color/colorTextPrimary"
+                android:textSize="@dimen/text_size_primary"
+                app:currencyCode="@{rate.currencyCode}" />
+
+            <TextView
+                android:id="@+id/rate_country_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/placeholder"
+                android:textColor="@color/colorTextSecondary"
+                android:textSize="@dimen/text_size_secondary"
+                app:currencyName="@{rate.currencyName}" />
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <EditText
+            android:id="@+id/rate_exchange_rate_edit_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:afterTextChanged="@{(s)->rateListener.onTextChanged(s, rate)}"
+            android:gravity="center"
+            android:hint="@string/placeholder_decimal"
+            android:imeOptions="actionDone"
+            android:inputType="numberDecimal"
+            android:text="@string/placeholder_decimal"
+            app:backgroundTint="@color/colorAccent"
+            app:rateValue="@{rate.value}"
+            tools:ignore="Autofill,LabelFor" />
+
+    </LinearLayout>
+
+</layout>
