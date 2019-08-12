@@ -34,12 +34,12 @@ class RatesViewModel(private val ratesApi: RatesApi) : ViewModel() {
 
     init {
         selectedRate = Rate(
-                "EUR",
-                "Euro",
-                1.0,
-                "EU",
-                100.0,
-                true
+            "EUR",
+            "Euro",
+            1.0,
+            "EU",
+            100.0,
+            true
         )
         fetchRates()
     }
@@ -68,12 +68,12 @@ class RatesViewModel(private val ratesApi: RatesApi) : ViewModel() {
             val rates = ratesResponse?.rates ?: return@withContext ArrayList<Rate>()
             val rateList = rates.map {
                 Rate(
-                        it.key,
-                        currencyNames[it.key],
-                        it.value,
-                        countryCodes[it.key],
-                        it.value * selectedRate.value,
-                        false
+                    it.key,
+                    currencyNames[it.key],
+                    it.value,
+                    countryCodes[it.key],
+                    it.value * selectedRate.value,
+                    false
                 )
             }.asReversed().filterNot { it.currencyCode == selectedRate.currencyCode }.toMutableList()
             rateList.add(0, selectedRate)

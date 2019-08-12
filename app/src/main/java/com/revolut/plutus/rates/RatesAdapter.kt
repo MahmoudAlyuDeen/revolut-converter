@@ -9,7 +9,7 @@ import com.revolut.plutus.api.Rate
 import com.revolut.plutus.databinding.ItemRateBinding
 
 class RatesAdapter(private val rateListener: RateListener) :
-        ListAdapter<Rate, RatesAdapter.RateViewHolder>(DiffCallBack) {
+    ListAdapter<Rate, RatesAdapter.RateViewHolder>(DiffCallBack) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RateViewHolder {
         return RateViewHolder(ItemRateBinding.inflate(LayoutInflater.from(parent.context), parent, false))
@@ -42,8 +42,8 @@ class RatesAdapter(private val rateListener: RateListener) :
 }
 
 class RateListener(
-        private val onTextChangedListener: (enteredValue: CharSequence) -> Unit,
-        private val onClickListener: (rate: Rate) -> Unit
+    private val onTextChangedListener: (enteredValue: CharSequence) -> Unit,
+    private val onClickListener: (rate: Rate) -> Unit
 ) {
 
     fun onTextChanged(s: CharSequence, rate: Rate) {
