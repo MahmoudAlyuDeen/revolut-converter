@@ -14,25 +14,28 @@ private const val BASE_URL = " https://revolut.duckdns.org/"
 fun getFlagUrl(countryCode: String) =
     "https://raw.githubusercontent.com/hjnilsson/country-flags/master/png250px/${countryCode.toLowerCase()}.png"
 
-private val moshi = Moshi.Builder()
-    .add(KotlinJsonAdapterFactory())
-    .build()
-
-private val retrofit = Retrofit.Builder()
-    .addConverterFactory(MoshiConverterFactory.create(moshi))
-    .addCallAdapterFactory(CoroutineCallAdapterFactory())
-    .baseUrl(BASE_URL)
-    .build()
-
 interface RatesApiService {
     @GET("/latest")
     fun getRatesAsync(@Query("base") type: String):
             Deferred<RatesResponse>
 }
 
-object RatesApi {
-    val retrofitService: RatesApiService by lazy {
-        retrofit.create(RatesApiService::class.java)
+class RatesApi {
+
+    fun getRatesService(): RatesApiService {
+
+        val moshi = Moshi.Builder()
+            .add(KotlinJsonAdapterFactory())
+            .build()
+
+        val retrofit = Retrofit.Builder()
+            .addConverterFactory(MoshiConverterFactory.create(moshi))
+            .addCallAdapterFactory(CoroutineCallAdapterFactory())
+            .baseUrl(BASE_URL)
+            .build()
+
+        return retrofit.create(RatesApiService::class.java)
+
     }
 }
 

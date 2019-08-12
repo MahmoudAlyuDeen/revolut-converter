@@ -14,7 +14,7 @@ import com.revolut.plutus.currencyNames
 import kotlinx.coroutines.*
 
 @Suppress("JoinDeclarationAndAssignment")
-class RatesViewModel : ViewModel() {
+class RatesViewModel(private val ratesApi: RatesApi) : ViewModel() {
 
     private val viewModelJob = Job()
 
@@ -46,7 +46,7 @@ class RatesViewModel : ViewModel() {
 
     private fun fetchRates() {
         coroutineScope.launch {
-            val ratesResponseDeferred = RatesApi.retrofitService.getRatesAsync(selectedRate.currencyCode)
+            val ratesResponseDeferred = ratesApi.getRatesService().getRatesAsync(selectedRate.currencyCode)
             try {
                 _status.value = LOADING
                 ratesResponse = ratesResponseDeferred.await()
