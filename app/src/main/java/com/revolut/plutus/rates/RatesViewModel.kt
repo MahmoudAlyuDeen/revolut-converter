@@ -1,6 +1,5 @@
 package com.revolut.plutus.rates
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -56,7 +55,6 @@ class RatesViewModel(private val ratesApi: RatesApi) : ViewModel() {
                 fetchRates()
             } catch (e: Exception) {
                 _status.value = ERROR
-                Log.e("getRatesError: ", e.message)
                 delay(1000)
                 fetchRates()
             }
