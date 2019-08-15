@@ -42,13 +42,13 @@ class RatesAdapter(private val rateListener: RateListener) :
 }
 
 class RateListener(
-    private val onTextChangedListener: (enteredValue: CharSequence) -> Unit,
+    private val onTextChangedListener: (enteredValue: CharSequence, rate: Rate) -> Unit,
     private val onClickListener: (rate: Rate) -> Unit
 ) {
 
     fun onTextChanged(s: CharSequence, rate: Rate) {
         if (rate.selected) {
-            onTextChangedListener(s)
+            onTextChangedListener(s, rate)
         }
     }
 

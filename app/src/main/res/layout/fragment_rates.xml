@@ -28,6 +28,7 @@
             android:layout_height="match_parent"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:rates="@{ratesViewModel.rateList}"
+            app:scrollToTop="@{ratesViewModel.scrollToTop}"
             tools:listitem="@layout/item_rate" />
 
 

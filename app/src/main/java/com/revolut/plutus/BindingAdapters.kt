@@ -14,10 +14,17 @@ import com.revolut.plutus.rates.RatesAdapter
 import java.text.NumberFormat
 
 @BindingAdapter("rates")
-fun bindRecyclerView(recyclerView: RecyclerView, rates: List<Rate>?) {
+fun bindRates(recyclerView: RecyclerView, rates: List<Rate>?) {
     rates?.let {
         val adapter = recyclerView.adapter as RatesAdapter
         adapter.submitList(rates)
+    }
+}
+
+@BindingAdapter("scrollToTop")
+fun scrollToTop(rv: RecyclerView, scrollToTop: Boolean?) {
+    scrollToTop?.let {
+        rv.scrollToPosition(0)
     }
 }
 
