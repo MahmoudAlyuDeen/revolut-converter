@@ -110,7 +110,7 @@ class RatesViewModel(private val ratesApi: RatesApi) : ViewModel() {
                 conversionRate = 1.0
                 selected = true
             }
-            runBlocking { updateRateList() }
+            updateRateList()
             _scrollToTop.value = true
         }
     }
